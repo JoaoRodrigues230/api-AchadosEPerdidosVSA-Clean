@@ -33,4 +33,10 @@ public class Usuario
 
     [ForeignKey("AcessoId")]
     public virtual AcessoUsuario Acesso { get; set; } = null!;
+
+    [Column("usua_confirmado")]
+    public bool Confirmado { get; set; } = false;
+
+    [Column("usua_token_confirmacao")]
+    public Guid TokenConfirmacao { get; set; }
 }
