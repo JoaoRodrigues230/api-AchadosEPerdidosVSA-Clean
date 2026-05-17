@@ -17,11 +17,15 @@ public class LoginHandler : IRequestHandler<LoginCommand, LoginResponse?>
         var user = await _context.Usuarios
             .FirstOrDefaultAsync(u => u.Email == command.Request.Email, ct);
 
-        if (user == null) return null;
+        if (user == null || !PasswordHasher.ValidarSenha(command.Request.Senha, user.Senha))
+        {
+            return null;
+        }
 
-        var senhaValida = PasswordHasher.ValidarSenha(command.Request.Senha, user.Senha);
-
-        if (!senhaValida) return null;
+        if (!user.Confirmado)
+        {
+            throw new Exception("Conta ainda não confirmada. Verifique seu e-mail.");
+        }
 
         return new LoginResponse(user.Id, user.Nome, user.Email, user.AcessoId);
     }

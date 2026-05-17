@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using API_AchadosEPerdidos.Features.Users.CreateUser;
 using API_AchadosEPerdidos.Features.Users.Login;
+using API_AchadosEPerdidos.Features.Users.ConfirmUser;
 
 namespace API_AchadosEPerdidos.Features.Users;
 
@@ -26,7 +27,13 @@ public class UsersController : ControllerBase
 
         if (response == null)
             return Unauthorized(new { message = "E-mail ou senha inválidos." });
-
         return Ok(response);
+    }
+
+    [HttpGet("confirm")]
+    public async Task<IActionResult> ConfirmarEmail([FromQuery] Guid token)
+    {
+        var result = await _mediator.Send(new ConfirmUserCommand(token));
+        return result ? Ok("Conta confirmada com sucesso!") : BadRequest("Token inválido ou expirado.");
     }
 }
