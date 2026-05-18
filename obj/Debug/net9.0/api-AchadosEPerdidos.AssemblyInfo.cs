@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("api-AchadosEPerdidos")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f50f19ddc77cd864b5e393a19e3a9b14ba8e9d3f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e80514d42f1cee5bc045e4e601945690522d6649")]
 [assembly: System.Reflection.AssemblyProductAttribute("api-AchadosEPerdidos")]
 [assembly: System.Reflection.AssemblyTitleAttribute("api-AchadosEPerdidos")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

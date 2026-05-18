@@ -5,12 +5,20 @@ using API_AchadosEPerdidos.Shared.Security;
 
 namespace API_AchadosEPerdidos.Features.Users.Login;
 
+public record LoginRequest(string Email, string Senha);
+public record LoginResponse(string Nome, string Token);
 public record LoginCommand(LoginRequest Request) : IRequest<LoginResponse?>;
 
 public class LoginHandler : IRequestHandler<LoginCommand, LoginResponse?>
 {
     private readonly AppDbContext _context;
-    public LoginHandler(AppDbContext context) => _context = context;
+    private readonly TokenService _tokenService;
+
+    public LoginHandler(AppDbContext context, TokenService tokenService)
+    {
+        _context = context;
+        _tokenService = tokenService;
+    }
 
     public async Task<LoginResponse?> Handle(LoginCommand command, CancellationToken ct)
     {
@@ -24,9 +32,11 @@ public class LoginHandler : IRequestHandler<LoginCommand, LoginResponse?>
 
         if (!user.Confirmado)
         {
-            throw new Exception("Conta ainda não confirmada. Verifique seu e-mail.");
+            throw new Exception("Conta ainda não confirmada. Verifique seu e-mail no Mailtrap.");
         }
 
-        return new LoginResponse(user.Id, user.Nome, user.Email, user.AcessoId);
+        var tokenReal = _tokenService.GerarToken(user);
+
+        return new LoginResponse(user.Nome, tokenReal);
     }
 }

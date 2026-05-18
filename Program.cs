@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using API_AchadosEPerdidos.Shared.Infrastructure.Data;
 using API_AchadosEPerdidos.Shared.Infrastructure.Email;
+using API_AchadosEPerdidos.Shared.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,9 @@ builder.Services.AddSwaggerGen();
 //pega seção do email settings do appsettings e atribui os valores a class
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 builder.Services.AddScoped<EmailService>();
+
+//token autenticação
+builder.Services.AddScoped<TokenService>();
 
 var app = builder.Build();
 
