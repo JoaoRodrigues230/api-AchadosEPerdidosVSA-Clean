@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using API_AchadosEPerdidos.Shared.Infrastructure.Data;
 using API_AchadosEPerdidos.Shared.Security;
+using API_AchadosEPerdidos.Shared.Infrastructure.Sockets;
 
 namespace API_AchadosEPerdidos.Features.Users.Login;
 
@@ -36,6 +37,8 @@ public class LoginHandler : IRequestHandler<LoginCommand, LoginResponse?>
         }
 
         var tokenReal = _tokenService.GerarToken(user);
+
+        await AchadosSocketServer.NotificarLoginDuplo(user.Id);
 
         return new LoginResponse(user.Nome, tokenReal);
     }
