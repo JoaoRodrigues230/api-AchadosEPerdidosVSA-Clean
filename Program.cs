@@ -24,7 +24,7 @@ builder.Services.AddScoped<EmailService>();
 builder.Services.AddScoped<TokenService>();
 
 //background service do canal socket
-builder.Services.AddHostedService<NexusSocketServer>();
+builder.Services.AddHostedService<AchadosSocketServer>();
 
 var app = builder.Build();
 
