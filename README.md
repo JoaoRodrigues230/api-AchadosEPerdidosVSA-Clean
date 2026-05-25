@@ -1,8 +1,8 @@
 # Achados e Perdidos Backend build passing version 1.0.0
 
-Conta para testes:
-  email: teste@unisantos.br
-  senha: teste123
+* Conta para testes:
+  * Email: teste@unisantos.br
+  * Senha: teste123
 
 Uma arquitetura orientada a fatias verticais (*Vertical Slice Architecture) que integra serviços síncronos HTTP (REST) com um servidor de notificações persistentes via **Sockets TCP* (Port 11000) para gerenciamento de sessões e eventos em tempo real.
 
