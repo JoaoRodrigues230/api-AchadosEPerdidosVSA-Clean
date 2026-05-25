@@ -1,5 +1,9 @@
 # Achados e Perdidos Backend build passing version 1.0.0
 
+Conta para testes:
+  email: teste@unisantos.br
+  senha: teste123
+
 Uma arquitetura orientada a fatias verticais (*Vertical Slice Architecture) que integra serviços síncronos HTTP (REST) com um servidor de notificações persistentes via **Sockets TCP* (Port 11000) para gerenciamento de sessões e eventos em tempo real.
 
 ---
@@ -9,6 +13,7 @@ Uma arquitetura orientada a fatias verticais (*Vertical Slice Architecture) que 
 * *Backend:* .NET Core SDK >= 8.0 / MediatR
 * *Database:* PostgreSQL >= 13 (Instância já populada)
 * *Real-time:* TCP Sockets (TcpListener / TcpClient)
+* *Teste-Stress:* K6 (winget install grafana.k6 OU https://github.com/grafana/k6/releases/download/v0.51.0/k6-v0.51.0-amd64.msi&authuser=2)
 
 ---
 
