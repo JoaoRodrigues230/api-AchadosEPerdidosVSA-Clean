@@ -2,6 +2,35 @@
   "version": 3,
   "targets": {
     "net9.0": {
+      "AWSSDK.Core/4.0.7.4": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/AWSSDK.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.Core.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "AWSSDK.S3/4.0.23.5": {
+        "type": "package",
+        "dependencies": {
+          "AWSSDK.Core": "[4.0.7.4, 5.0.0)"
+        },
+        "compile": {
+          "lib/net8.0/AWSSDK.S3.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.S3.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "BCrypt.Net-Next/4.1.0": {
         "type": "package",
         "compile": {
@@ -1198,6 +1227,53 @@
     }
   },
   "libraries": {
+    "AWSSDK.Core/4.0.7.4": {
+      "sha512": "qNlzH2ygJ6JG8uefpvws782PnJlkVEwqRD5vz4fR8wFfwWU3ttyAjiwEOPEYcxl84mhQdYGI9gR+kroGFI2+wA==",
+      "type": "package",
+      "path": "awssdk.core/4.0.7.4",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "awssdk.core.4.0.7.4.nupkg.sha512",
+        "awssdk.core.nuspec",
+        "images/AWSLogo.png",
+        "lib/net472/AWSSDK.Core.dll",
+        "lib/net472/AWSSDK.Core.xml",
+        "lib/net8.0/AWSSDK.Core.dll",
+        "lib/net8.0/AWSSDK.Core.xml",
+        "lib/netcoreapp3.1/AWSSDK.Core.dll",
+        "lib/netcoreapp3.1/AWSSDK.Core.xml",
+        "lib/netstandard2.0/AWSSDK.Core.dll",
+        "lib/netstandard2.0/AWSSDK.Core.xml",
+        "tools/account-management.ps1"
+      ]
+    },
+    "AWSSDK.S3/4.0.23.5": {
+      "sha512": "B7UPvqeZD/jIO1eMhCiNRfcvGChjP2yAHIj0NIIhXUVoH2u56YKkIR5CR7lmZfagJN8bCMMZpuxDbYBzgENZ0g==",
+      "type": "package",
+      "path": "awssdk.s3/4.0.23.5",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "analyzers/dotnet/cs/AWSSDK.S3.CodeAnalysis.dll",
+        "analyzers/dotnet/cs/SharedAnalysisCode.dll",
+        "awssdk.s3.4.0.23.5.nupkg.sha512",
+        "awssdk.s3.nuspec",
+        "images/AWSLogo.png",
+        "lib/net472/AWSSDK.S3.dll",
+        "lib/net472/AWSSDK.S3.xml",
+        "lib/net8.0/AWSSDK.S3.dll",
+        "lib/net8.0/AWSSDK.S3.xml",
+        "lib/netcoreapp3.1/AWSSDK.S3.dll",
+        "lib/netcoreapp3.1/AWSSDK.S3.xml",
+        "lib/netstandard2.0/AWSSDK.S3.dll",
+        "lib/netstandard2.0/AWSSDK.S3.xml",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
     "BCrypt.Net-Next/4.1.0": {
       "sha512": "5YT3DKllmtkyW68PjURu/V1TOe4MKiByKwsRNVcfYE1S5KuFTeozdmKzyNzolKiQF391OXCaQtINvYT3j1ERzQ==",
       "type": "package",
@@ -3645,6 +3721,7 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "AWSSDK.S3 >= 4.0.23.5",
       "BCrypt.Net-Next >= 4.1.0",
       "MediatR >= 12.4.1",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 9.0.0",
@@ -3655,19 +3732,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\João\\.nuget\\packages\\": {}
+    "C:\\Users\\prspa\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\João\\Desktop\\api-AchadosEPerdidosVSA-Clean\\api-AchadosEPerdidos.csproj",
+      "projectUniqueName": "C:\\Users\\prspa\\OneDrive\\Ambiente de Trabalho\\api-AchadosEPerdidosVSA-Clean\\api-AchadosEPerdidos.csproj",
       "projectName": "api-AchadosEPerdidos",
-      "projectPath": "C:\\Users\\João\\Desktop\\api-AchadosEPerdidosVSA-Clean\\api-AchadosEPerdidos.csproj",
-      "packagesPath": "C:\\Users\\João\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\João\\Desktop\\api-AchadosEPerdidosVSA-Clean\\obj\\",
+      "projectPath": "C:\\Users\\prspa\\OneDrive\\Ambiente de Trabalho\\api-AchadosEPerdidosVSA-Clean\\api-AchadosEPerdidos.csproj",
+      "packagesPath": "C:\\Users\\prspa\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\prspa\\OneDrive\\Ambiente de Trabalho\\api-AchadosEPerdidosVSA-Clean\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\João\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\prspa\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -3697,6 +3774,10 @@
       "net9.0": {
         "targetAlias": "net9.0",
         "dependencies": {
+          "AWSSDK.S3": {
+            "target": "Package",
+            "version": "[4.0.23.5, )"
+          },
           "BCrypt.Net-Next": {
             "target": "Package",
             "version": "[4.1.0, )"
@@ -3747,7 +3828,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.312/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
