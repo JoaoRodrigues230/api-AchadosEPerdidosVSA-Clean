@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using API_AchadosEPerdidos.Features.Itens.CreateItem;
 using API_AchadosEPerdidos.Features.Itens.BuscarItensHandler;
+using API_AchadosEPerdidos.Features.Itens.DeletarItem;
 
 namespace API_AchadosEPerdidos.Controllers;
 
@@ -31,6 +32,14 @@ public class ItemController : ControllerBase
     public async Task<IActionResult> BuscarItens([FromQuery] BuscarItensQuery query)
     {
         var resultado = await _mediator.Send(query);
+        await resultado.ExecuteAsync(HttpContext);
+        return new EmptyResult();
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> DeletarItem([FromRoute] int id)
+    {
+        var resultado = await _mediator.Send(new DeletarItemCommand(id));
         await resultado.ExecuteAsync(HttpContext);
         return new EmptyResult();
     }
