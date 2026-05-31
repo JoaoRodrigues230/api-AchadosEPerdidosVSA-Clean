@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using API_AchadosEPerdidos.Features.Itens.CreateItem;
 using API_AchadosEPerdidos.Features.Itens.BuscarItensHandler;
 using API_AchadosEPerdidos.Features.Itens.DeletarItem;
+using API_AchadosEPerdidos.Features.Itens.AtualizarItem;
 
 namespace API_AchadosEPerdidos.Controllers;
 
@@ -40,6 +41,14 @@ public class ItemController : ControllerBase
     public async Task<IActionResult> DeletarItem([FromRoute] int id)
     {
         var resultado = await _mediator.Send(new DeletarItemCommand(id));
+        await resultado.ExecuteAsync(HttpContext);
+        return new EmptyResult();
+    }
+
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> AtualizarItem([FromRoute] int id, [FromBody] AtualizarItemCommand command)
+    {
+        var resultado = await _mediator.Send(command);
         await resultado.ExecuteAsync(HttpContext);
         return new EmptyResult();
     }
