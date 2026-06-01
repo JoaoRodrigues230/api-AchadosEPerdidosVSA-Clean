@@ -18,4 +18,4 @@ COPY --from=build /app/publish .
 ENV ASPNETCORE_URLS=http://+:$PORT
 EXPOSE 10000
 
-ENTRYPOINT ["dotnet", "API_AchadosEPerdidos.dll"]
+ENTRYPOINT ["dotnet", "api-AchadosEPerdidos.dll"]
