@@ -8,7 +8,7 @@ using API_AchadosEPerdidos.Features.Itens.DeletarItem;
 namespace API_AchadosEPerdidos.Controllers;
 
 [ApiController]
-[Route("api/itens")]
+[Route("itens")]
 public class ItemController : ControllerBase
 {
     private readonly IMediator _mediator;
