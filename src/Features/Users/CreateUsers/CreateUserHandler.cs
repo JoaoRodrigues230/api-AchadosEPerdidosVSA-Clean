@@ -52,10 +52,13 @@ public class CreateUserHandler : IRequestHandler<CreateUserCommand, Guid>
         _context.Usuarios.Add(novoUsuario);
         await _context.SaveChangesAsync(ct);
 
-        var linkConfirmacao = $"http://localhost:5000/usuario/confirm?token={token}";
+        var baseUrl = Environment.GetEnvironmentVariable("RENDER_EXTERNAL_URL") ?? "http://localhost:5000";
+
+        var linkConfirmacao = $"{baseUrl}/usuario/confirm?token={token}";
+
         await _emailService.SendEmailAsync(
             novoUsuario.Email,
-            "Bem-vindo ao Nexus - Confirme seu E-mail",
+            "Bem-vindo ao Achados e Perdidos - Confirme seu E-mail",
             $"<h1>Olá, {novoUsuario.Nome}!</h1><p>Clique <a href='{linkConfirmacao}'>aqui</a> para validar sua conta.</p>"
         );
 

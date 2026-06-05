@@ -15,7 +15,6 @@ public class EmailService
 
     public async Task SendEmailAsync(string to, string subject, string body)
     {
-        Console.WriteLine($"--- Tentando enviar e-mail para: {to} ---");
         try
         {
             using var client = new SmtpClient(_settings.SmtpServer, _settings.Port)
@@ -40,7 +39,7 @@ public class EmailService
         catch (Exception ex)
         {
             Console.WriteLine($"--- ERRO AO ENVIAR EMAIL: {ex.Message} ---");
-            throw; // Repassa o erro para o log aparecer no terminal
+            throw; 
         }
     }
 }
