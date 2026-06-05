@@ -33,7 +33,7 @@ public class EmailService
 
             mailMessage.To.Add(to);
 
-            await client.SendMailAsync(mailMessage);
+            await Task.Run(() => client.Send(mailMessage));
             Console.WriteLine("--- E-mail enviado com sucesso ao servidor SMTP! ---");
         }
         catch (Exception ex)
