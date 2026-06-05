@@ -28,7 +28,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Progr
 
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(API_AchadosEPerdidos.Controllers.ItemController).Assembly);
-    
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -46,15 +46,23 @@ builder.Services.AddScoped<IStorageService, CloudflareR2Service>();
 
 var app = builder.Build();
 
-app.UseSwagger();
-app.UseSwaggerUI();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 if (!app.Environment.IsProduction())
 {
     app.UseHttpsRedirection();
 }
 
+app.UseRouting();
+
+app.UseCors("ProductionCors");
 app.UseAuthorization();
+
 app.MapControllers();
 
-app.Run();
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+app.Run($"http://*:{port}");
