@@ -7,6 +7,19 @@ using API_AchadosEPerdidos.Shared.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("ProductionCors", policy =>
+    {
+        policy.WithOrigins(
+                "http://localhost:5173",    
+                "https://achados-perdidos-six.vercel.app" 
+               )
+              .AllowAnyMethod()  
+              .AllowAnyHeader(); 
+    });
+});
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -34,7 +47,11 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsProduction())
+{
+    app.UseHttpsRedirection();
+}
+
 app.UseAuthorization();
 app.MapControllers();
 
