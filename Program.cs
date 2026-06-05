@@ -46,11 +46,11 @@ builder.Services.AddScoped<IStorageService, CloudflareR2Service>();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 if (!app.Environment.IsProduction())
 {
