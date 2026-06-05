@@ -29,6 +29,8 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Progr
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(API_AchadosEPerdidos.Controllers.ItemController).Assembly);
 
+builder.Services.AddTransient<EmailService>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -65,4 +67,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-app.Run($"http://*:{port}");
+app.Run();

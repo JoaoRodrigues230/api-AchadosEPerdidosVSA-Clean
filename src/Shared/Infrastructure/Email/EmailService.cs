@@ -20,7 +20,8 @@ public class EmailService
             using var client = new SmtpClient(_settings.SmtpServer, _settings.Port)
             {
                 Credentials = new NetworkCredential(_settings.Username, _settings.Password),
-                EnableSsl = true
+                EnableSsl = true,
+                Timeout = 5000
             };
 
             var mailMessage = new MailMessage
