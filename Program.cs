@@ -26,7 +26,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 //config MediatR, localizando os handlers do vsla automaticamente
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddApplicationPart(typeof(API_AchadosEPerdidos.Controllers.ItemController).Assembly);
+    
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
