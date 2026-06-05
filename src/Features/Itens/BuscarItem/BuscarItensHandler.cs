@@ -10,8 +10,11 @@ public record ItemListaDto(
     int Id,
     string Nome,
     DateTime DataAchado,
+    int CategoriaId,       
     string CategoriaNome,
+    int LocalId,         
     string LocalNome,
+    int StatusId,       
     string StatusNome,
     string? Descricao,
     string? FotoCapaUrl
@@ -71,8 +74,11 @@ public class BuscarItensHandler : IRequestHandler<BuscarItensQuery, IResult>
                 i.Id,
                 i.Nome,
                 i.DataAchado,
+                i.CategoriaId,     
                 i.Categoria.Nome,
+                i.LocalId,          
                 i.Local.Nome,
+                i.StatusId,          
                 i.StatusItem.Status,
                 i.Descricao,
                 i.Imagens.FirstOrDefault(img => img.IsMain).Url ?? i.Imagens.FirstOrDefault().Url

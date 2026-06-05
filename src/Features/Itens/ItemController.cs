@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using API_AchadosEPerdidos.Features.Itens.CreateItem;
 using API_AchadosEPerdidos.Features.Itens.BuscarItensHandler;
 using API_AchadosEPerdidos.Features.Itens.DeletarItem;
+using API_AchadosEPerdidos.Features.Itens.AtualizarItem;
 
 namespace API_AchadosEPerdidos.Controllers;
 
@@ -42,5 +43,12 @@ public class ItemController : ControllerBase
         var resultado = await _mediator.Send(new DeletarItemCommand(id));
         await resultado.ExecuteAsync(HttpContext);
         return new EmptyResult();
+    }
+
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> AtualizarItem([FromRoute] int id, [FromBody] AtualizarItemRequest request)
+    {
+        var resultado = await _mediator.Send(new AtualizarItemCommand(id, request));
+        return resultado is Microsoft.AspNetCore.Http.HttpResults.NotFound<object> ? NotFound(resultado) : Ok(resultado);
     }
 }
