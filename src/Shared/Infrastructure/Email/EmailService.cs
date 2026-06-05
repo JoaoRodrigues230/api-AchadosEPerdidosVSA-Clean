@@ -1,6 +1,7 @@
-using System.Net;
-using System.Net.Mail;
 using Microsoft.Extensions.Options;
+using MimeKit;
+using MailKit.Net.Smtp;
+using MailKit.Security;
 
 namespace API_AchadosEPerdidos.Shared.Infrastructure.Email;
 
@@ -17,30 +18,28 @@ public class EmailService
     {
         try
         {
-            using var client = new SmtpClient(_settings.SmtpServer, _settings.Port)
-            {
-                Credentials = new NetworkCredential(_settings.Username, _settings.Password),
-                EnableSsl = true,
-                Timeout = 5000
-            };
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress(_settings.SenderName, _settings.SenderEmail));
+            message.To.Add(new MailboxAddress("", to));
+            message.Subject = subject;
 
-            var mailMessage = new MailMessage
-            {
-                From = new MailAddress(_settings.SenderEmail, _settings.SenderName),
-                Subject = subject,
-                Body = body,
-                IsBodyHtml = true
-            };
+            var bodyBuilder = new BodyBuilder { HtmlBody = body };
+            message.Body = bodyBuilder.ToMessageBody();
 
-            mailMessage.To.Add(to);
+            using var client = new SmtpClient();
 
-            await Task.Run(() => client.Send(mailMessage));
-            Console.WriteLine("--- E-mail enviado com sucesso ao servidor SMTP! ---");
+            await client.ConnectAsync(_settings.SmtpServer, _settings.Port, SecureSocketOptions.StartTls);
+            
+            await client.AuthenticateAsync(_settings.Username, _settings.Password);
+            await client.SendAsync(message);
+            await client.DisconnectAsync(true);
+
+            Console.WriteLine("--- [Gmail MailKit] E-mail enviado com sucesso! ---");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"--- ERRO AO ENVIAR EMAIL: {ex.Message} ---");
-            throw; 
+            Console.WriteLine($"--- ERRO NO GMAIL VIA MAILKIT: {ex.Message} ---");
+            throw new Exception($"Kestrel salvou, mas o MailKit falhou no Gmail: {ex.Message}");
         }
     }
 }
