@@ -37,6 +37,14 @@ public class ItemController : ControllerBase
         return new EmptyResult();
     }
 
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> BuscarItemPorId([FromRoute] int id)
+    {
+        var resultado = await _mediator.Send(new BuscarItemPorIdQuery(id));
+        await resultado.ExecuteAsync(HttpContext);
+        return new EmptyResult();
+    }
+
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeletarItem([FromRoute] int id)
     {
