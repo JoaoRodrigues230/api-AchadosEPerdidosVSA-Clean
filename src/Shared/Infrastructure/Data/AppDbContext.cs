@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using API_AchadosEPerdidos.Features.Users.Models;
 using API_AchadosEPerdidos.Features.Itens.Models;
 using API_AchadosEPerdidos.Features.Local.Models;
+using API_AchadosEPerdidos.Features.Reivindicacoes.Models;
 
 namespace API_AchadosEPerdidos.Shared.Infrastructure.Data;
 
@@ -15,6 +16,7 @@ public class AppDbContext : DbContext
     public DbSet<API_AchadosEPerdidos.Features.Local.Models.Local> Locais { get; set; }
     public DbSet<Categoria> Categorias { get; set; }
     public DbSet<StatusItem> StatusItens { get; set; }
+    public DbSet<Reivindicacao> Reivindicacoes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -25,5 +27,6 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<API_AchadosEPerdidos.Features.Local.Models.Local>().ToTable("local");
         modelBuilder.Entity<Categoria>().ToTable("categoria");
         modelBuilder.Entity<StatusItem>().ToTable("status_item");
+        modelBuilder.Entity<Reivindicacao>().ToTable("reivindicacoes");
     }
 }
