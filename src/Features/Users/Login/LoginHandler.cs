@@ -9,7 +9,7 @@ namespace API_AchadosEPerdidos.Features.Users.Login;
 
 public record LoginRequest(string Email, string Senha);
 //FinOps PCG (implementar em pasta de testes futuramente)
-public record LoginResponse(string Nome, string Token, object FinOps);
+public record LoginResponse(string Nome, string Token, object FinOps, Guid Id);
 public record LoginCommand(LoginRequest Request) : IRequest<LoginResponse?>;
 
 public class LoginHandler : IRequestHandler<LoginCommand, LoginResponse?>
@@ -86,6 +86,6 @@ public class LoginHandler : IRequestHandler<LoginCommand, LoginResponse?>
             }
         };
 
-        return new LoginResponse(user.Nome, tokenReal, metricasFinOps);
+        return new LoginResponse(user.Nome, tokenReal, metricasFinOps, user.Id);
     }
 }
